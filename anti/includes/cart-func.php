@@ -2,10 +2,16 @@
 // File: includes/cart_handlers.php
 
 namespace db;
-
+require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/prod.php';
+require_once __DIR__ . '/cart-func.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 use Exception;
 use db\DB;
 
+use function db\getGuestSessionId;
 function handleAddToCart(DB $db, int $productId): array {
     $cartIdentifier = isLoggedIn() 
         ? ['user_id' => $_SESSION['user_id']] 
@@ -43,6 +49,8 @@ function handleAddToCart(DB $db, int $productId): array {
     return ['success' => true];
 }
 
+
+
 function handleGetCart(DB $db): array {
     $whereClause = isLoggedIn() 
         ? "user_id = {$_SESSION['user_id']}" 
@@ -70,6 +78,19 @@ function handleRemoveFromCart(DB $db, int $productId): array {
         "DELETE FROM cart_items 
          WHERE $whereClause AND product_id = $productId"
     );
+
+    return ['success' => true];
+}
+function handleUpdateQuantity(DB $db, int $productId, int $quantity): array {
+    if (isLoggedIn()) {
+        $userId = $_SESSION['user_id'];
+       $stmt = $db->link->prepare('UPDATE ...');('UPDATE cart_items SET quantity = ? WHERE user_id = ? AND product_id = ?');
+        $stmt->execute([$quantity, $userId, $productId]);
+    } else {
+        $sessionId = getGuestSessionId();
+        $stmt = $db->link->prepare('UPDATE ...');('UPDATE cart_items SET quantity = ? WHERE session_id = ? AND product_id = ?');
+        $stmt->execute([$quantity, $sessionId, $productId]);
+    }
 
     return ['success' => true];
 }

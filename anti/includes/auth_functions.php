@@ -2,6 +2,7 @@
 namespace db;
 require_once __DIR__ . '/db.php';
 
+
 function generateSessionId() {
     return bin2hex(random_bytes(32));
 }

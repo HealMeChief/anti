@@ -80,4 +80,15 @@ if (isset($_GET['action']) && $_GET['action'] === 'login') {
     exit;
 }
 
+function getGuestSessionId(): string {
+    if (!isset($_SESSION['guest_session_id'])) {
+        $_SESSION['guest_session_id'] = generateSessionId();
+        $db = new DB();
+        $db->link->query(
+            "INSERT INTO guest_sessions (session_id) VALUES ('{$_SESSION['guest_session_id']}')"
+        );
+    }
+    return $_SESSION['guest_session_id'];
+}
+
 // Если нет action
