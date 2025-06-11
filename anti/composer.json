@@ -1,0 +1,11 @@
+{
+    "name": "test/test",
+    "type": "test",
+    "require": {},
+
+    "autoload": {
+        "psr-4": {
+            "db\\": "includes/"
+        }
+    }
+}
