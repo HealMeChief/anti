@@ -3,15 +3,7 @@ require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/auth.php'; 
 require_once __DIR__ . '/includes/db.php';
 require "vendor/autoload.php";
-// Отладочный вывод
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
 
-// Проверяем, есть ли guest_session_id
-if (!isset($_SESSION['guest_session_id'])) {
-    die("Гостевая сессия не создана!");
-}
 
 
 

@@ -1,6 +1,6 @@
 <?php
 namespace db;
-require "vendor/autoload.php";
+require_once __DIR__ . '/../vendor/autoload.php';
 
 function generateSessionId() {
     return bin2hex(random_bytes(32));

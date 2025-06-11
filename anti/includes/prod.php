@@ -25,7 +25,7 @@ public function __construct($product_id, $name, $price, $image_url, $hover_image
 
 public function get_product() {
     return 
-    "<div class='item' id='$this->product_id'>".
+    "<div class='item' data-id='$this->product_id'>".
         "<div class='m-img'>".
             "<img class='main-img' src='$this->image_url'>".
             "<img class='hover-img' src='$this->hover_image_url'>".

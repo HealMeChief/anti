@@ -5,7 +5,8 @@ require_once __DIR__ . '/../includes/config.php';
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/db.php';
 require_once __DIR__ . '/../includes/prod.php';
-require "vendor/autoload.php";
+require_once __DIR__ . '/cart-func.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use db\DB;
 use function db\isLoggedIn;
